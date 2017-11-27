@@ -154,48 +154,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5e6c74daea7d4c458409b4cb12f5e5f, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1449035877
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4273269338827130, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: ee2da389e630d42acb618d69d803d2b7, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1670099255
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +228,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1670099255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3, y: 3.6, z: -10}
+  m_LocalPosition: {x: 30.26, y: 3.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
