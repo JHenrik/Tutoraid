@@ -1,54 +1,54 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+﻿//using UnityEngine;
+//using UnityEngine.UI;
+//using System.Collections;
 
-public class Health : MonoBehaviour
-{
-	public int startingHealth = 100;
-	public int currentHealth;
-	public Slider healthSlider;
-
-
-	Animator anim;
-	Player playerMovement;
-	Shooting playerShooting;
-	bool dead;
-	bool damaged;
+//public class Health : MonoBehaviour
+//{
+	//public int startingHealth = 100;
+	//public int currentHealth;
+	//public Slider healthSlider;
 
 
-	void Awake ()
-	{
-		anim = GetComponent <Animator> ();
-		playerMovement = GetComponent <Player> ();
-		playerShooting = GetComponentInChildren <Shooting> ();
-
-		currentHealth = startingHealth;
-	}
-
-	public void TakeDamage (int amount)
-		{
-		damaged = true;
-
-		currentHealth -= 10;
-
-		healthSlider.value = currentHealth;
-
-		if(currentHealth <= 0 && !dead)
-		{
-			Death ();
-		}
-	}
+	//Animator anim;
+	//Player playerMovement;
+	//Shooting playerShooting;
+	//bool dead;
+	//bool damaged;
 
 
-	void Death ()
-	{
-		dead = true;
+	//void Awake ()
+	//{
+		//anim = GetComponent <Animator> ();
+		//playerMovement = GetComponent <Player> ();
+		//playerShooting = GetComponentInChildren <Shooting> ();
 
-		playerShooting.DisableEffects ();
+		//currentHealth = startingHealth;
+	//}
 
-		anim.SetTrigger ("Die");
+	//public void TakeDamage (int amount)
+//		{
+	//	damaged = true;
+    //
+		///currentHealth -= 10;
+        //
+//		healthSlider.value = currentHealth;
+//
+	//	if(currentHealth <= 0 && !dead)
+		//{
+		//	Death ();
+	//	}
+//	}
 
-		playerMovement.enabled = false;
-		playerShooting.enabled = false;
-	}       
-}
+
+	//void Death ()
+//	{
+	//	dead = true;
+
+	//	playerShooting.DisableEffects ();
+
+	//	anim.SetTrigger ("Die");
+
+		//playerMovement.enabled = false;
+	//	playerShooting.enabled = false;
+//	}       
+//}
