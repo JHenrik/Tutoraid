@@ -67,5 +67,12 @@ public class playermovement : MonoBehaviour {
 		{
 			player.velocity = new Vector2(-maxSpeed, player.velocity.y);
 		}
+
+		var camera = GameObject.FindGameObjectWithTag ("MainCamera");
+
+		camera.transform.position = new Vector3 (transform.position.x, camera.transform.position.y, camera.transform.position.z);
+	
 	}
 }
+
+
