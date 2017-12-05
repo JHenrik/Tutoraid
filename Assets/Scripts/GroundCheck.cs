@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour {
 
-	private Playermovement Player;
+	private playermovement Player;
 
     private void Start()
     {
         // Call the player Script from the Player
-		Player = gameObject.GetComponentInParent<Playermovement>();
+		Player = gameObject.GetComponentInParent<playermovement>();
     
     }
 

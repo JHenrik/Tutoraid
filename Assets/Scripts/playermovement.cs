@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Playermovement : MonoBehaviour {
+public class playermovement : MonoBehaviour {
 
 	// properties
 	public float maxSpeed = 3;
@@ -37,7 +37,7 @@ public class Playermovement : MonoBehaviour {
 			transform.localScale = new Vector3(1, 1, 1);
 		}
 
-		if(Input.GetButtonDown ("Jump")&&grounded == false)
+		if(Input.GetButtonDown ("Jump")&&grounded == true)
 		{
 			player.AddForce(Vector2.up * jump);
 
