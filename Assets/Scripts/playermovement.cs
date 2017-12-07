@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class playermovement : MonoBehaviour
-{
+public class Playermovement : MonoBehaviour {
+
 
 	// properties
 	public float maxSpeed = 3;
@@ -127,6 +127,4 @@ public class playermovement : MonoBehaviour
 	}
 
 }
-
-
 
