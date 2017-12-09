@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 61552630012049986}
   - component: {fileID: 114093380181071718}
   - component: {fileID: 114188935060472220}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BossEnemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61552630012049986
 BoxCollider2D:
   m_ObjectHideFlags: 1

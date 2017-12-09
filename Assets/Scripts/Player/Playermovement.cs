@@ -10,7 +10,7 @@ public class Playermovement : MonoBehaviour {
 	//Max speed
 	public float speed = 100;
 	// players speed
-	public float jump = 150;
+	public float jumpPower = 150;
 	// Height of the jump
 
 	//to see if player is on the ground or not
@@ -22,6 +22,8 @@ public class Playermovement : MonoBehaviour {
 	//players current health
 	public int MaxHP = 100;
 	//player maximum health
+	public float distanceToPlayerBase = 2.6f;
+	private float runAnimator;
 
 
 
@@ -47,8 +49,15 @@ public class Playermovement : MonoBehaviour {
 	void Update ()
 	{
 		//player movement  
-		ani.SetBool ("Grounded", grounded); // Boolean value to grounded
-		ani.SetFloat ("Speed", Mathf.Abs (Input.GetAxis ("Horizontal"))); // Float set to get the absolute value of speed 
+
+		runAnimator = Mathf.Abs (Input.GetAxis ("Horizontal"));
+		if (runAnimator != 0 && grounded == true)
+		{
+			ani.SetBool ("Running" , true);
+		}else
+		{
+			ani.SetBool ("Running" , false);
+		}
 
 		//when moving in the -x axis the player will have scale value x as minus so it will face the direction of movement
 		if (Input.GetAxis ("Horizontal") < -0.1) {
@@ -60,15 +69,18 @@ public class Playermovement : MonoBehaviour {
 			transform.localScale = new Vector3 (1, 1, 1); // scale value when moving to x
 		}
 
+		
+
 		//Player jumps
-		if (Input.GetButtonDown ("Jump") && grounded == true) { // can jump only when grounded 
-			player.AddForce (Vector2.up * jump); // when button is pressed it adds the vector of speed and jump force
+		if (Input.GetButtonDown ("Jump") && grounded == true) 
+		{ 
+			// can jump only when grounded 
+			Jump ();
+			ani.SetBool ("isJumping", true);
 
-		}
-
-		if (grounded && Input.GetButtonDown ("Jump")) { // if player is in air it can't jump
-			player.AddForce (Vector2.up * jump);
-			grounded = false; // not able to jump
+		}else if (!this.ani.GetCurrentAnimatorStateInfo(0).IsName("Jump")) 
+		{
+	    	ani.SetBool ("isJumping", false);
 		}
 
 		// Current HP cant be over the max HP
@@ -86,6 +98,8 @@ public class Playermovement : MonoBehaviour {
 		}
 		var camera = GameObject.FindGameObjectWithTag ("MainCamera");
 		camera.transform.position = new Vector3 (transform.position.x, camera.transform.position.y, camera.transform.position.z);
+
+
 	}
 
 
@@ -105,11 +119,35 @@ public class Playermovement : MonoBehaviour {
 			player.velocity = new Vector2 (-maxSpeed, player.velocity.y);
 		}
 
+		PlayerRaycast ();
+	}
 
+	void Jump ()
+	{
+		// ..code for jumping
+		player.AddForce (Vector2.up * jumpPower);
+		grounded = false;
 
 	}
 
-	// when player CurrentHP goes under 0 will it will trigger these actions
+
+	void PlayerRaycast()
+    {	
+	//Ray Down
+	RaycastHit2D rayDown = Physics2D.Raycast (transform.position, Vector2.down);
+
+	if (rayDown.collider != null && rayDown.distance < distanceToPlayerBase && rayDown.collider.tag != "enemy")
+	{
+//		Debug.Log ("HitRay has hit " + rayDown.collider.name);
+	    grounded = true;
+
+	}else
+	{
+		grounded = false;
+	}
+    }
+
+	// when player CurrentHP goes under 0 it will trigger these actions
 	void Death ()
 	{
 
@@ -117,11 +155,9 @@ public class Playermovement : MonoBehaviour {
 		//make it so it can't move
 		speed = 0f; 
 		maxSpeed = 0f; 
-		jump = 0f;
 		//make a reset button so when "r" key is pressed it loads the first scene and you start again
 		if (Input.GetKey ("r"))
 			SceneManager.LoadScene (0);
-
 
 	}
 
