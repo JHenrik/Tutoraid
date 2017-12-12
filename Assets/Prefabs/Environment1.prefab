@@ -1966,7 +1966,7 @@ GameObject:
   - component: {fileID: 61574720644524722}
   m_Layer: 0
   m_Name: FirstFloorCol
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4942,7 +4942,7 @@ GameObject:
   - component: {fileID: 4265453887963758}
   m_Layer: 0
   m_Name: Environment1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

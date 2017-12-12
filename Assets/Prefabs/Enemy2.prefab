@@ -24,11 +24,12 @@ GameObject:
   - component: {fileID: 50776999305262456}
   - component: {fileID: 61465266701230470}
   - component: {fileID: 61327912194375182}
-  - component: {fileID: 114500686177344644}
   - component: {fileID: 114430911958384670}
-  m_Layer: 0
+  - component: {fileID: 114500686177344644}
+  - component: {fileID: 114652216601237420}
+  m_Layer: 2
   m_Name: Enemy2
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1110211468772946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.62, y: 1.6, z: 0}
+  m_LocalPosition: {x: 12.33, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +66,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61327912194375182
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -161,8 +162,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91943d5e777d5426bb7044b054b0a0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackInterval: 0.6
+  attackAmount: 6
   player: {fileID: 0}
   restart: {fileID: 0}
+--- !u!114 &114652216601237420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110211468772946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75de0387d6e184c628deda9d4da4a2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  curHealth: 0
+  scoreAmount: 10
 --- !u!212 &212667146130660500
 SpriteRenderer:
   m_ObjectHideFlags: 1
