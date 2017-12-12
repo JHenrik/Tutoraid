@@ -24,7 +24,10 @@ GameObject:
   - component: {fileID: 50080365069616338}
   - component: {fileID: 61317944533134090}
   - component: {fileID: 114631050308465166}
+<<<<<<< HEAD
   - component: {fileID: 114596607672678210}
+=======
+>>>>>>> 71488d3eec00ca0bd1b8680f52821a0757cc5d2d
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -32,6 +35,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!1 &1275557037246266
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +64,8 @@ Transform:
   m_Father: {fileID: 4273269338827130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> 71488d3eec00ca0bd1b8680f52821a0757cc5d2d
 --- !u!4 &4273269338827130
 Transform:
   m_ObjectHideFlags: 1
@@ -67,10 +73,16 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174103824884780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -11.28, y: 1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4129974782300938}
+=======
+  m_LocalPosition: {x: -12.3, y: 1.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+>>>>>>> 71488d3eec00ca0bd1b8680f52821a0757cc5d2d
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,6 +148,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+<<<<<<< HEAD
 --- !u!114 &114596607672678210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,6 +166,8 @@ MonoBehaviour:
   conversionImage: {fileID: 0}
   imageFlashSpeed: 4
   damageColor: {r: 0.7490196, g: 0.039215688, b: 0.039215688, a: 0.101960786}
+=======
+>>>>>>> 71488d3eec00ca0bd1b8680f52821a0757cc5d2d
 --- !u!114 &114631050308465166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +185,11 @@ MonoBehaviour:
   speed: 100
   jumpPower: 600
   grounded: 0
+<<<<<<< HEAD
+=======
+  CurrentHP: 0
+  MaxHP: 100
+>>>>>>> 71488d3eec00ca0bd1b8680f52821a0757cc5d2d
   distanceToPlayerBase: 2.6
 --- !u!212 &212380061685994686
 SpriteRenderer:

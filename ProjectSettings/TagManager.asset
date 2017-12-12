@@ -6,7 +6,10 @@ TagManager:
   tags:
   - Ground
   - enemy
+<<<<<<< HEAD
   - Throwable
+=======
+>>>>>>> 71488d3eec00ca0bd1b8680f52821a0757cc5d2d
   layers:
   - Default
   - TransparentFX
