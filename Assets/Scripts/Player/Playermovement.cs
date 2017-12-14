@@ -1,54 +1,94 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Playermovement : MonoBehaviour {
-
-
-	// properties
-	public float maxSpeed = 3;
-	//Max speed
-	public float speed = 100;
-	// players speed
-	public float jumpPower = 150;
-	// Height of the jump
-
-	//to see if player is on the ground or not
-	public bool grounded;
-
-	//Player Health
-
-	public int CurrentHP;
-	//players current health
-	public int MaxHP = 100;
-	//player maximum health
-	public float distanceToPlayerBase = 2.6f;
-	private float runAnimator;
-
-
-
-
-
-	private Rigidbody2D player;
-	// to identify player
-	private Animator ani;
-	// to find the animations
+public class Playermovement : MonoBehaviour 
+{
+	public GameObject throwCup;  //place holder for the throw cup game object
+	public Transform throwPoint;  //the point at which the cups will be thrown
+	public float maxSpeed = 3;    //Max speed
+	public float speed = 100;  // players speed
+	public float jumpPower = 150; // Height of the jump
+	public int maxCups = 20; //how many cups the player has to use
+	public int curCups; //how many cups there is at given time
+	public Text coffeeText; // counts the coffee in UI
+	public int coffeeCup; // cups in the coffeeText counter on UI
+	public bool grounded; //to see if player is on the ground or not
+	public float distanceToPlayerBase = 2.6f; //Used by raycast to check if player is grounded
+	private ThrowSound throwSound; // sound file that playes when you throw 
+	private float runAnimator; //used to trigger run animation
+	private Rigidbody2D player;     // to identify player
+	private Animator ani;    // to find the animations
 
 	void Start ()
 	{
 		//When game starts the player and animator are created
 		player = gameObject.GetComponent<Rigidbody2D> ();
 		ani = gameObject.GetComponent<Animator> ();
-
-		//the player starts the game with full HP
-		CurrentHP = MaxHP;
+		throwSound = GameObject.Find("ThrowSoundManager").GetComponent<ThrowSound>();
+		coffeeCup = 0; // on start you have 0 coffeecups
+		SetCountText (); // on start it makes the text file to the UI
 
 	}
 
 
 	void Update ()
 	{
-		//player movement  
+		//..Moving code
+		Moving ();
+
+
+
+		//Player jumps
+		if (Input.GetButtonDown ("Jump") && grounded == true) 
+		{ 
+			// can jump only when grounded 
+			Jump ();
+			ani.SetBool ("isJumping", true);
+
+		}else if (!this.ani.GetCurrentAnimatorStateInfo(0).IsName("Jump")) 
+		{
+			ani.SetBool ("isJumping", false);
+		}
+
+		//...Throwing code
+		if (Input.GetKeyDown (KeyCode.V) && curCups > 0) {
+
+			//..Once button is pressed, we create a throw game object
+			GameObject coffeeClone = (GameObject)Instantiate (throwCup, throwPoint.position, throwPoint.rotation); 
+
+			//...Flips the throw direction in relation to the player
+			coffeeClone.transform.localScale = transform.localScale * 0.04f;
+
+			throwSound.PlayThrowSound ();
+			ani.SetTrigger ("Throw"); //..activates throw animation
+
+			Destroy (coffeeClone.gameObject, 1.2f);
+			curCups--; // when you press "v" it takes 1 cup away for curcups
+			coffeeCup--; // when you press "v" it takes 1 cup away for the UI text
+			SetCountText (); //references the counttext file
+
+
+		}
+
+	}
+	// on trigger enter it collects the collectable
+	void OnTriggerEnter2D (Collider2D other){
+		if (other.tag == "Collectable"){
+			Destroy(other.gameObject); // upon collecting it destroys the object from the scene
+			coffeeCup += 1; // adds one to coffeecup text UI
+			curCups += 1; // adds one to current cups
+			SetCountText (); //references the counttext file
+
+		}
+	}
+
+
+
+	void Moving ()
+	{
+		//..Ensure player only runs when on the ground
 
 		runAnimator = Mathf.Abs (Input.GetAxis ("Horizontal"));
 		if (runAnimator != 0 && grounded == true)
@@ -68,41 +108,7 @@ public class Playermovement : MonoBehaviour {
 		if (Input.GetAxis ("Horizontal") > 0.1) {
 			transform.localScale = new Vector3 (1, 1, 1); // scale value when moving to x
 		}
-
-		
-
-		//Player jumps
-		if (Input.GetButtonDown ("Jump") && grounded == true) 
-		{ 
-			// can jump only when grounded 
-			Jump ();
-			ani.SetBool ("isJumping", true);
-
-		}else if (!this.ani.GetCurrentAnimatorStateInfo(0).IsName("Jump")) 
-		{
-	    	ani.SetBool ("isJumping", false);
-		}
-
-		// Current HP cant be over the max HP
-		if (CurrentHP > MaxHP) {
-			CurrentHP = MaxHP;
-		}
-		//When current health goes below 0 it will trigger a Death method
-		if (CurrentHP <= 0) { 
-
-			Death ();
-		}
-
-		if (Input.GetKeyDown (KeyCode.V)) { 
-			ani.SetTrigger ("Throw");
-		}
-		var camera = GameObject.FindGameObjectWithTag ("MainCamera");
-		camera.transform.position = new Vector3 (transform.position.x, camera.transform.position.y, camera.transform.position.z);
-
-
 	}
-
-
 
 	void FixedUpdate ()
 	{
@@ -111,7 +117,7 @@ public class Playermovement : MonoBehaviour {
 
 		player.AddForce (Vector2.right * speed * h);
 
-		// cant go faster than maxSpeed
+		// can't go faster than maxSpeed
 		if (player.velocity.x > maxSpeed) {
 			player.velocity = new Vector2 (maxSpeed, player.velocity.y);
 		}
@@ -130,36 +136,27 @@ public class Playermovement : MonoBehaviour {
 
 	}
 
-
 	void PlayerRaycast()
-    {	
-	//Ray Down
-	RaycastHit2D rayDown = Physics2D.Raycast (transform.position, Vector2.down);
+	{    
+		//..creating the RayDown
+		RaycastHit2D rayDown = Physics2D.Raycast (transform.position, Vector2.down);
 
-	if (rayDown.collider != null && rayDown.distance < distanceToPlayerBase && rayDown.collider.tag != "enemy")
-	{
-//		Debug.Log ("HitRay has hit " + rayDown.collider.name);
-	    grounded = true;
+		if (rayDown.collider != null && rayDown.distance < distanceToPlayerBase && rayDown.collider.tag != "enemy")
+		{
+			//Debug.Log ("HitRay has hit " + rayDown.collider.name);
+			grounded = true;
 
-	}else
-	{
-		grounded = false;
+		}else
+		{
+			grounded = false;
+		}
 	}
-    }
 
-	// when player CurrentHP goes under 0 it will trigger these actions
-	void Death ()
+	//UI collected cup counter 
+	void SetCountText ()
 	{
-
-		ani.SetTrigger ("Dead"); // death animation
-		//make it so it can't move
-		speed = 0f; 
-		maxSpeed = 0f; 
-		//make a reset button so when "r" key is pressed it loads the first scene and you start again
-		if (Input.GetKey ("r"))
-			SceneManager.LoadScene (0);
-
+		coffeeText.text = "Coffee collected " + coffeeCup.ToString(); //displays the cups collected
 	}
 
 }
- 
+

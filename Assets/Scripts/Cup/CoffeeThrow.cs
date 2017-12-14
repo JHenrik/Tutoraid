@@ -9,13 +9,18 @@ public class CoffeeThrow : MonoBehaviour
 
 	private Rigidbody2D cupRigidBody;  //...reference to the rigidbody2D
 	public List<GameObject> detectedEnemies;  //..refers to detected enemies
+
+	private CoffeeSounds spillsound;
 	public int damageAmount;
+//	private AudioSource splashSound;
 
 
 	void Start()
 	{
 		//...Assigning of components at start
 		cupRigidBody = GetComponent<Rigidbody2D>();
+		//splashSound = GetComponent<AudioSource>();
+		spillsound = GameObject.Find("CupSoundManager").GetComponent<CoffeeSounds>();
 	}
 
 	void FixedUpdate ()
@@ -36,13 +41,25 @@ public class CoffeeThrow : MonoBehaviour
 			//...Give damage to the detected enemies
 			foreach (GameObject enemy in detectedEnemies)
         	{
-            	//Debug.Log (enemy.name + " receives 10 damage");
-				EnemyHealth targetHealth = enemy.GetComponent<EnemyHealth> ();
-				
-				targetHealth.GetDamage(damageAmount);
+				if (enemy == null)
+				{					
+					continue;
+
+				}else
+				{
+					//Debug.Log (enemy.name + " receives 10 damage");
+					EnemyHealth targetHealth = enemy.GetComponent<EnemyHealth> ();
+					targetHealth.GetDamage(damageAmount);
+
+				}
+							
         	}
 			
+			spillsound.PlayCupSound ();
+			
 			Destroy (gameObject); //..Destroys the cup from the scene.
+
+			
 		}
 
 	}

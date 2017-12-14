@@ -20,6 +20,7 @@ public class Door : MonoBehaviour {
             if (Input.GetKeyDown("e"))
             {
 				SceneManager.LoadScene(LevelToLoad);
+                //set hp here
             }
         }
     }

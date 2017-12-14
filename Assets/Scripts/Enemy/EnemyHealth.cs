@@ -13,6 +13,8 @@ public class EnemyHealth : MonoBehaviour
     private BoxCollider2D boxCollider2D;  //... refers to enemy's box collider
     private Animator enemyAC;  //... enemy's animator controller
     private bool dead;   //... checks whether the enemy is dead
+	private AudioSource enemyHurtSound;
+
 
 
         void Start ()
@@ -23,6 +25,8 @@ public class EnemyHealth : MonoBehaviour
 			curHealth = maxHealth;
 
 			boxCollider2D = GetComponent<BoxCollider2D> ();
+
+            enemyHurtSound = GetComponent<AudioSource> ();
 
 			
         }
@@ -47,6 +51,9 @@ public class EnemyHealth : MonoBehaviour
                 return;
 			}
 
+            enemyHurtSound.Stop ();
+            enemyHurtSound.Play ();
+            
             curHealth -= amount;  //...How to reduce enemy health
             
             //...Check if the enemy is dead

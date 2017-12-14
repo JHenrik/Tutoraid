@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61027428577896852}
   m_Layer: 0
   m_Name: CoffeeCup
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  coffeeText: {fileID: 0}
 --- !u!212 &212922568241004426
 SpriteRenderer:
   m_ObjectHideFlags: 1

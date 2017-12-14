@@ -17,6 +17,9 @@ public class PlayerHealth : MonoBehaviour
 	private Playermovement playerMvScript;    //Reference to player movement script   
 	private bool dead;
 	private bool damage;
+	private AudioSource playerHurtSound;
+	private AudioSource playerdeadSoundEffects;
+
 
 	// Use this for initialization
 	void Start () 
@@ -27,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
 		//..assigning the health and player movement on start
 		healthAnim = GetComponent <Animator> ();
 		playerMvScript = GetComponent <Playermovement> ();
+		playerHurtSound = GetComponent<AudioSource> ();
+		playerdeadSoundEffects = GameObject.Find("PlayerDeadSoundManager").GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +47,9 @@ public class PlayerHealth : MonoBehaviour
         if(damage == true)
         {
             conversionImage.color = damageColor;  //set canvas image color
+			playerHurtSound.Stop ();
+			playerHurtSound.Play ();
+
         }
         else
         {
@@ -52,9 +60,6 @@ public class PlayerHealth : MonoBehaviour
 		// ensure damage is false again or reset
         damage = false;
 
-		//..Restart from first level if player is dead
-		if (Input.GetKey ("r") && CurrentHP <= 0)
-		SceneManager.LoadScene (0);
     }
 
 	public void GetDamage (int amount)
@@ -78,10 +83,20 @@ public class PlayerHealth : MonoBehaviour
 
         dead = true;
 
+		playerdeadSoundEffects.Play ();
+
         healthAnim.SetTrigger ("Dead");  // sets the death animation
 
         playerMvScript.enabled = false;    // Disables player movement
 
+		StartCoroutine (ScreenDelay ());
+
+	}
+	//Waits 3 sec before loading game over scene
+	IEnumerator ScreenDelay(){
+		if (CurrentHP <= 0)
+			yield return new WaitForSeconds(3);
+			SceneManager.LoadScene ("GameOver");
 	}
 
 }
